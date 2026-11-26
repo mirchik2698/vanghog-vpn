@@ -1,0 +1,6 @@
+.env
+*.env
+trials.json
+__pycache__/
+*.pyc
+.venv/

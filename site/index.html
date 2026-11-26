@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>VanGhogVPN — защита, которая светится</title>
+<meta name="description" content="VanGhogVPN: без логов, неделя бесплатно, до 3 устройств без потери скорости.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080f2a;--bg2:#0f1d4d;--card:rgba(18,32,82,.72);--line:rgba(245,200,75,.28);--moon:#f5c84b;--moon2:#ffe28a;--sky:#7db4e6;--text:#efe8cf;--muted:#a9b4d6;--ok:#9fe3b0;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--moon2);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:700 26px/1 var(--serif);letter-spacing:.02em;text-decoration:none}
+.logo span{color:var(--moon)}
+nav a.nl{font-weight:500;color:var(--muted);text-decoration:none;margin-left:22px}
+nav a.nl:hover{color:var(--moon2)}
+.hero{min-height:calc(100svh - 70px);display:grid;place-items:center;text-align:center;padding:30px 0 60px}
+h1{font:700 clamp(40px,8vw,84px)/1.02 var(--serif);margin:0 0 18px;text-wrap:balance}
+.lead{max-width:34em;margin:0 auto 38px;color:var(--muted);font-size:clamp(17px,2.4vw,20px)}
+.stage{position:relative;width:200px;height:200px;margin:0 auto 18px;display:grid;place-items:center}
+#power{position:relative;width:132px;height:132px;border-radius:50%;border:2px solid var(--moon);background:radial-gradient(circle at 35% 30%,#2a43a0,#101c4f 70%);color:var(--moon2);cursor:pointer;display:grid;place-items:center;box-shadow:0 0 40px rgba(245,200,75,.25);transition:box-shadow .5s,background .5s,transform .2s}
+#power:hover{transform:scale(1.04)}
+#power:active{transform:scale(.97)}
+#power svg{width:46px;height:46px}
+#power.on{background:radial-gradient(circle at 35% 30%,#ffe28a,#e0a912 75%);color:#14204f;box-shadow:0 0 70px 12px rgba(255,214,90,.55)}
+#state{font:700 20px/1.3 var(--serif);min-height:1.4em}
+#state.on{color:var(--ok)}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.snd{margin-top:14px;font-size:14px;color:var(--muted);display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.snd input{accent-color:var(--moon);width:16px;height:16px}
+.cta{display:inline-block;margin-top:30px;padding:14px 28px;border-radius:999px;background:var(--moon);color:#14204f;font-weight:700;text-decoration:none;transition:background .2s}
+.cta:hover{background:var(--moon2)}
+section{padding:70px 0}
+h2{font:700 clamp(32px,5vw,52px)/1.1 var(--serif);margin:0 0 14px}
+.sub{color:var(--muted);max-width:36em;margin:0 0 38px}
+.grid{display:grid;gap:18px}
+.feat{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;backdrop-filter:blur(6px)}
+.feat .card{border-radius:6px 26px 6px 26px}
+.card h3{font:700 25px/1.2 var(--serif);margin:0 0 8px;color:var(--moon2)}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.plans{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:stretch}
+.plan{display:flex;flex-direction:column;gap:6px}
+.plan.best{border:2px solid var(--moon);box-shadow:0 0 50px rgba(245,200,75,.2)}
+.plan .name{font:700 24px/1 var(--serif);color:var(--sky)}
+.price{font:700 44px/1.1 var(--sans);letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums;min-height:58px;display:flex;align-items:baseline;gap:8px}
+.price small{font:500 18px var(--sans);color:var(--muted)}
+.save{color:var(--ok);font-weight:700;font-size:15px;flex:1;margin-bottom:16px}
+.cmp{color:var(--muted);font-size:14px;margin:0 0 14px;flex:1}
+.plan button{font:700 16px var(--sans);padding:14px;border-radius:14px;border:1px solid var(--moon);background:transparent;color:var(--moon2);cursor:pointer}
+.plan.best button,.plan button:hover{background:var(--moon);color:#14204f}
+.free{margin-top:22px;text-align:center;color:var(--muted)}
+.pay{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+.chip{padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-weight:700}
+.steps{list-style:none;counter-reset:s;margin:26px 0 0;padding:0;display:grid;gap:14px;max-width:640px}
+.steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;color:var(--muted)}
+.steps li::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--moon);color:var(--moon2);display:grid;place-items:center;font:700 17px var(--sans)}
+.steps b{color:var(--text)}
+footer{padding:40px 0 50px;color:var(--muted);font-size:14px;text-align:center;border-top:1px solid var(--line)}
+dialog{border:1px solid var(--moon);border-radius:22px;background:#0f1d4d;color:var(--text);padding:28px;width:min(420px,92vw)}
+dialog::backdrop{background:rgba(4,8,24,.75)}
+dialog h3{font:700 28px var(--serif);margin:0 0 4px}
+dialog p{color:var(--muted);margin:0 0 16px;font-size:15px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font:700 16px var(--sans);cursor:pointer}
+.opt:hover{border-color:var(--moon)}
+.note{font-size:14px;color:var(--moon2);min-height:1.4em;margin-top:10px}
+.close{background:none;border:0;color:var(--muted);cursor:pointer;font:500 15px var(--sans);margin-top:10px;padding:6px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:560px){nav a.nl{display:none}section{padding:48px 0}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="wrap">
+  <nav aria-label="Основная навигация">
+    <a class="logo" href="#top">Van<span>Ghog</span>VPN</a>
+    <div><a class="nl" href="#why">Почему мы</a><a class="nl" href="#price">Тарифы</a></div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1>Интернет под звёздным небом</h1>
+      <p class="lead">Спокойное соединение без логов и сбора личных данных. Первая неделя бесплатно.</p>
+      <div class="stage">
+        <button id="power" type="button" aria-pressed="false" aria-label="Включить защиту (демонстрация)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v8"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+        </button>
+      </div>
+      <div id="state" role="status" aria-live="polite">Защита выключена</div>
+      <p class="hint">Нажмите на кнопку — так выглядит подключение в приложении</p>
+      <label class="snd"><input type="checkbox" id="snd" checked> Звук подключения</label><br>
+      <a class="cta" href="#price">Попробовать неделю бесплатно</a>
+    </div>
+  </div>
+
+  <section id="why"><div class="wrap">
+    <h2>Просто работает</h2>
+    <p class="sub">Мы не делаем вид, что знаем о вас всё. Наоборот: мы о вас ничего не храним.</p>
+    <div class="grid feat">
+      <div class="card"><h3>Без логов</h3><p>Не ведём журналы и не собираем личные данные.</p></div>
+      <div class="card"><h3>Неделя в подарок</h3><p>Пробный период бесплатный. Оплата только если понравилось.</p></div>
+      <div class="card"><h3>Полгода без сбоев</h3><p>Подключение держится стабильно: проверено полгода ежедневной работы.</p></div>
+      <div class="card"><h3>До 3 устройств</h3><p>Без потери скорости и пакетов — телефон, ноутбук и планшет одновременно.</p></div>
+    </div>
+  </div></section>
+
+  <section id="price"><div class="wrap">
+    <h2>Тарифы</h2>
+    <p class="sub">Чем дольше подписка, тем выгоднее. Сравниваем с недельным тарифом.</p>
+    <div class="grid plans" id="plans"></div>
+    <p class="free">Первая неделя — бесплатно, карта для старта не нужна.</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>Как оплатить</h2>
+    <p class="sub">Два привычных способа.</p>
+    <div class="pay"><span class="chip">Банковская карта</span><span class="chip">СБП</span></div>
+    <ol class="steps">
+      <li><span><b>Выберите тариф.</b> Откроется бот в Telegram или письмо на нашу почту. Бесплатную неделю можно запросить там же.</span></li>
+      <li><span><b>Получите реквизиты</b> и переведите сумму картой или через СБП.</span></li>
+      <li><span><b>Пришлите чек.</b> После подтверждения вы получите ключ и инструкцию по подключению.</span></li>
+    </ol>
+  </div></section>
+</main>
+
+<footer><div class="wrap">© <span id="yr">2026</span> VanGhogVPN. Не собираем личные данные.</div></footer>
+
+<dialog id="dlg" aria-labelledby="dt">
+  <h3 id="dt"></h3>
+  <p id="dp"></p>
+  <button class="opt" data-m="tg" type="button">Через Telegram-бот</button>
+  <button class="opt" data-m="mail" type="button">Через почту</button>
+  <div class="note" id="note" role="status"></div>
+  <button class="close" id="cl" type="button">Закрыть</button>
+</dialog>
+
+<script>
+"use strict";
+/* Впишите сюда ваш Telegram-ник без @ (например, "vanghog_support"). Пока пусто — кнопка оплаты покажет, что чат ещё подключается. */
+var TG = "vpndlya_svoix_bot";
+var MAIL = "vanghog1903@gmail.com";
+
+var PLANS = [
+  {id:"week", name:"Неделя", price:"99", per:"₽ / неделя", save:"Попробовать можно бесплатно"},
+  {id:"month", name:"Месяц", price:"199", per:"₽ / месяц", save:"Выгода 50%"},
+  {id:"year", name:"Год", price:"1999", per:"₽ / год", save:"Выгода 61%", best:true}
+];
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+var box=document.getElementById("plans");
+PLANS.forEach(function(p){
+  var c=el("div","card plan"+(p.best?" best":""));
+  c.appendChild(el("div","name",p.name));
+  var pr=el("div","price",p.price+" ");pr.appendChild(el("small","",p.per));c.appendChild(pr);
+  c.appendChild(el("div","save",p.save));
+  var b=el("button","","Выбрать «"+p.name+"»");b.type="button";
+  b.addEventListener("click",function(){openPay(p)});
+  c.appendChild(b);box.appendChild(c);
+});
+
+/* Оплата */
+var dlg=document.getElementById("dlg"),cur=null;
+function openPay(p){
+  cur=p;
+  document.getElementById("dt").textContent="Тариф «"+p.name+"»";
+  document.getElementById("dp").textContent=p.price+" "+p.per.replace("₽ / ","₽ за ")+". Как удобнее оформить заказ?";
+  document.getElementById("note").textContent="";
+  if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");
+}
+dlg.addEventListener("click",function(e){
+  var m=e.target.getAttribute&&e.target.getAttribute("data-m");
+  if(m&&cur){
+    if(m==="mail"){
+      var sub="VanGhogVPN: тариф «"+cur.name+"»";
+      var body="Здравствуйте! Хочу тариф «"+cur.name+"» ("+cur.price+" ₽). Пришлите реквизиты для оплаты.";
+      window.location.href="mailto:"+MAIL+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+      try{navigator.clipboard.writeText(MAIL)}catch(x){}
+      document.getElementById("note").textContent="Если почта не открылась, напишите на "+MAIL+" с темой «"+sub+"».";
+    } else if(/^[A-Za-z0-9_]{5,32}$/.test(TG)){
+      window.open("https://t.me/"+TG+"?start="+cur.id,"_blank","noopener");
+      document.getElementById("note").textContent="Открываем бота. Нажмите «Запустить», реквизиты придут там.";
+    } else document.getElementById("note").textContent="Чат оплаты скоро подключится. Загляните позже.";
+  }
+});
+document.getElementById("cl").addEventListener("click",function(){dlg.close?dlg.close():dlg.removeAttribute("open")});
+document.getElementById("yr").textContent=new Date().getFullYear();
+
+/* Небо */
+var cv=document.getElementById("sky"),cx=cv.getContext("2d"),W,H,DPR,stars=[],orbit=[],t=0,on=false,k=0;
+var still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function size(){DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);
+  stars=[];var n=Math.round(W*H/9000);for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.4,p:Math.random()*6.28,s:Math.random()*1.5+.5});}
+for(var i=0;i<70;i++)orbit.push({a:Math.random()*6.28,r:95+Math.random()*130,v:(Math.random()*.7+.35)*(Math.random()<.5?1:-1)*(1.2),z:Math.random()*2.6+1.2,y:Math.random()});
+function swirl(x,y,R,ph,al){
+  for(var j=0;j<5;j++){cx.beginPath();
+    for(var a=0;a<12;a+=.15){var r=R*(a/12)*(1+.08*Math.sin(a*2+t+ph)),px=x+Math.cos(a+ph+t*.15+j*1.256)*r,py=y+Math.sin(a+ph+t*.15+j*1.256)*r*.62;a?cx.lineTo(px,py):cx.moveTo(px,py)}
+    cx.strokeStyle="rgba(125,180,230,"+al+")";cx.lineWidth=2.2;cx.stroke()}}
+function frame(){
+  t+=.012;
+  var g=cx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#050a22");g.addColorStop(1,"#14286a");cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  swirl(W*.28,H*.3,Math.min(W,H)*.55,0,.13);swirl(W*.76,H*.55,Math.min(W,H)*.45,2,.1);
+  for(var i=0;i<stars.length;i++){var s=stars[i],tw=.55+.45*Math.sin(t*s.s*3+s.p);
+    cx.fillStyle="rgba(255,226,138,"+(tw*.9)+")";cx.beginPath();cx.arc(s.x,s.y,s.r*(.8+tw*.4),0,6.28);cx.fill()}
+  /* луна */
+  var mx=W*.86,my=H*.14,mg=cx.createRadialGradient(mx,my,4,mx,my,70);mg.addColorStop(0,"rgba(255,230,140,.95)");mg.addColorStop(.3,"rgba(245,200,75,.35)");mg.addColorStop(1,"rgba(245,200,75,0)");
+  cx.fillStyle=mg;cx.beginPath();cx.arc(mx,my,70,0,6.28);cx.fill();
+  /* звёзды вокруг кнопки */
+  k+=((on?1:0)-k)*.04;
+  if(k>.01){var b=document.getElementById("power").getBoundingClientRect(),bx=b.left+b.width/2,by=b.top+b.height/2;
+    for(var n=0;n<orbit.length;n++){var o=orbit[n];o.a+=o.v*.012*(.4+k);var rr=o.r*(.55+.45*k),
+      x=bx+Math.cos(o.a)*rr,y=by+Math.sin(o.a)*rr*.8,sz=o.z*(.6+k*.8);
+      var gl=cx.createRadialGradient(x,y,0,x,y,sz*4);gl.addColorStop(0,"rgba(255,236,160,"+(.95*k)+")");gl.addColorStop(1,"rgba(245,200,75,0)");
+      cx.fillStyle=gl;cx.beginPath();cx.arc(x,y,sz*4,0,6.28);cx.fill();
+      cx.fillStyle="rgba(255,250,220,"+k+")";cx.beginPath();cx.arc(x,y,sz*.7,0,6.28);cx.fill()}}
+  if(!still||k>.01||!frame.once){frame.once=1;requestAnimationFrame(frame)}
+}
+addEventListener("resize",size);size();frame();
+
+/* Звук: хор «а-а-а» на WebAudio, без внешних файлов */
+var AC=null;
+function choir(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();
+    var now=AC.currentTime,master=AC.createGain();master.gain.setValueAtTime(0,now);master.gain.linearRampToValueAtTime(.2,now+1.4);master.gain.setValueAtTime(.2,now+2.6);master.gain.linearRampToValueAtTime(0,now+5);
+    var f1=AC.createBiquadFilter(),f2=AC.createBiquadFilter();f1.type=f2.type="bandpass";f1.frequency.value=800;f2.frequency.value=1150;f1.Q.value=f2.Q.value=4;
+    var rev=AC.createDelay(.5);rev.delayTime.value=.23;var fb=AC.createGain();fb.gain.value=.4;rev.connect(fb);fb.connect(rev);
+    f1.connect(master);f2.connect(master);master.connect(AC.destination);master.connect(rev);rev.connect(AC.destination);
+    [146.83,220,293.66,369.99,440,587.33].forEach(function(fr,i){
+      [-6,6].forEach(function(d){
+        var o=AC.createOscillator(),g=AC.createGain(),l=AC.createOscillator(),lg=AC.createGain();
+        o.type="sawtooth";o.frequency.value=fr;o.detune.value=d;l.frequency.value=4.5+i*.3;lg.gain.value=5;l.connect(lg);lg.connect(o.detune);
+        g.gain.value=.09/(1+i*.2);o.connect(g);g.connect(f1);g.connect(f2);
+        o.start(now);l.start(now);o.stop(now+5.2);l.stop(now+5.2)})});
+  }catch(e){}
+}
+
+/* Кнопка подключения (демонстрация эффекта) */
+var pw=document.getElementById("power"),st=document.getElementById("state");
+pw.addEventListener("click",function(){
+  on=!on;pw.classList.toggle("on",on);pw.setAttribute("aria-pressed",String(on));st.classList.toggle("on",on);
+  st.textContent=on?"Защита включена":"Защита выключена";
+  pw.setAttribute("aria-label",on?"Выключить защиту (демонстрация)":"Включить защиту (демонстрация)");
+  if(on&&document.getElementById("snd").checked)choir();
+  if(still)requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>
